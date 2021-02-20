@@ -1,0 +1,3 @@
+include ':BClass'
+include ':app'
+rootProject.name = "BClassapp"
