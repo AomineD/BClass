@@ -81,6 +81,24 @@ if(assetName != null && !assetName.isEmpty()){
             PicassoUtils.loadImageWithLoading(rawFile, img, loading_root);
     }
 
+    public void loadImg(String url, boolean faded){
+        if(!url.isEmpty() && img != null && loading_root != null) {
+         if(!faded)
+            PicassoUtils.loadImageWithLoading(url, img, loading_root);
+         else
+             PicassoUtils.loadImageLoadingFade(url, img, loading_root);
+        }
+    }
+
+    public void loadImg(int rawFile, boolean faded){
+        if(rawFile != 0 && img != null && loading_root != null) {
+         if(!faded)
+            PicassoUtils.loadImageWithLoading(rawFile, img, loading_root);
+         else
+             PicassoUtils.loadImageLoadingFade(rawFile, img, loading_root);
+        }
+    }
+
 
     public void loadImgRound(String url, int rounded){
         if(!url.isEmpty() && img != null && loading_root != null)
