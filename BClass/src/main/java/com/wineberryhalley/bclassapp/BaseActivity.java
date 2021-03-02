@@ -5,12 +5,14 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.messaging.RemoteMessage;
 
 import org.json.JSONObject;
@@ -18,6 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.zip.Inflater;
 
 public abstract class BaseActivity extends AppCompatActivity {
     public abstract void Main();
@@ -45,10 +48,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         handleNotifIfExist();
         Main();
 
+        inflay = getLayoutInflater().inflate(R.layout.loading_lay, (ViewGroup) root(), false);
+         l = inflay.findViewById(R.id.lottie_ld);
 
-
+        ((ViewGroup) root()).addView(inflay);
+inflay.setVisibility(View.GONE);
 
     }
+
+    private View inflay;
 
     private Runnable runnable(int pxls) {
         return new Runnable() {
@@ -91,4 +99,47 @@ public abstract class BaseActivity extends AppCompatActivity {
         return this.getWindow().getDecorView().findViewById(android.R.id.content);
     }
 
+    private LottieAnimationView l;
+
+    public void showLoading(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                l.playAnimation();
+                inflay.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void showLoading(String assetName){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+        l.setAnimation(assetName);
+        l.playAnimation();
+        inflay.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void showLoadingNoLoop(String assetName){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+        l.setRepeatCount(1);
+        l.setAnimation(assetName);
+        l.playAnimation();
+        inflay.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void hideLoading(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+        inflay.setVisibility(View.GONE);
+            }
+        });
+    }
 }
