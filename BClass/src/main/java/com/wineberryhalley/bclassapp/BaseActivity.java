@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public static BaseActivity main;
 
 
+    private TextView loading_text;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         inflay = getLayoutInflater().inflate(R.layout.loading_lay, (ViewGroup) root(), false);
          l = inflay.findViewById(R.id.lottie_ld);
-
+loading_text = inflay.findViewById(R.id.txt_loading);
         ((ViewGroup) root()).addView(inflay);
 inflay.setVisibility(View.GONE);
 
@@ -111,6 +113,17 @@ inflay.setVisibility(View.GONE);
         });
     }
 
+    public void showLoadingWithText(String txt){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                l.playAnimation();
+                loading_text.setText(txt);
+                inflay.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
     public void showLoading(String assetName){
         runOnUiThread(new Runnable() {
             @Override
@@ -118,6 +131,18 @@ inflay.setVisibility(View.GONE);
         l.setAnimation(assetName);
         l.playAnimation();
         inflay.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void showLoading(String assetName, String txt){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                l.setAnimation(assetName);
+                loading_text.setText(txt);
+                l.playAnimation();
+                inflay.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -130,6 +155,19 @@ inflay.setVisibility(View.GONE);
         l.setAnimation(assetName);
         l.playAnimation();
         inflay.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void showLoadingNoLoop(String assetName, String txt){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                l.setRepeatCount(1);
+                l.setAnimation(assetName);
+                l.playAnimation();
+                loading_text.setText(txt);
+                inflay.setVisibility(View.VISIBLE);
             }
         });
     }
