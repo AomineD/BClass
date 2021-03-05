@@ -14,7 +14,7 @@
     </style>
 
     <color name="white">#fff</color>
-    <color name="black_trans_base">#B7000000</color>
+    <color name="black_trans_base">#D5000000</color>
 
     <declare-styleable name="ImageLoadingView">
         <attr name="assetName" format="string"/>

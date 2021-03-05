@@ -47,14 +47,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         main = this;
         setContentView(resLayout());
+        inflay = getLayoutInflater().inflate(R.layout.loading_lay, (ViewGroup) root(), false);
+        l = inflay.findViewById(R.id.lottie_ld);
+        loading_text = inflay.findViewById(R.id.txt_loading);
+        ((ViewGroup) root()).addView(inflay);
+        inflay.setVisibility(View.GONE);
         handleNotifIfExist();
         Main();
 
-        inflay = getLayoutInflater().inflate(R.layout.loading_lay, (ViewGroup) root(), false);
-         l = inflay.findViewById(R.id.lottie_ld);
-loading_text = inflay.findViewById(R.id.txt_loading);
-        ((ViewGroup) root()).addView(inflay);
-inflay.setVisibility(View.GONE);
+
 
     }
 
