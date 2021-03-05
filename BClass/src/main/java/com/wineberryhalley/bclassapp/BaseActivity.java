@@ -40,6 +40,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public static BaseActivity main;
 
+    public boolean isLoading(){
+       return inflay.getVisibility() == View.VISIBLE;
+    }
 
     private TextView loading_text;
     @Override
