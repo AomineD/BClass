@@ -19,6 +19,27 @@ public static void loadImageIn(String img, ImageView imgview){
 }
 
 
+    public static void loadCountryFlag(String code, ImageView imgview, LottieAnimationView lt){
+        // imgview.getRootView();
+        //  Log.e("MAIN", "loadImageWithLoading: "+imgview.getRootView().getClass().getSimpleName());
+        //lt.setVisibility(View.VISIBLE);
+        imgview.setVisibility(View.VISIBLE);
+        String img = "https://flagcdn.com/w320/"+code.toLowerCase()+".jpg";
+        //   Log.e("MAIN", "loadCountryFlag: "+img );
+        Picasso.get().load(Uri.parse(img)).fit().into(imgview, new Callback() {
+            @Override
+            public void onSuccess() {
+                imgview.setVisibility(View.VISIBLE);
+                lt.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                lt.setVisibility(View.GONE);
+            }
+        });
+    }
+
 
     public static void loadImageWithLoading(String img, ImageView imgview, LottieAnimationView lt){
    // imgview.getRootView();
