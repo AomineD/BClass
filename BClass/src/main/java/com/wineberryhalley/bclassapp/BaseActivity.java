@@ -40,6 +40,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public static BaseActivity main;
 
+    protected void setAnimAsset(String asset){
+        this.loading_anim = asset;
+    }
+
+    private String loading_anim = "loading_bs.json";
+
     public boolean isLoading(){
        return inflay.getVisibility() == View.VISIBLE;
     }
@@ -111,6 +117,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                l.setAnimation(loading_anim);
                 l.playAnimation();
                 inflay.setVisibility(View.VISIBLE);
             }
@@ -121,6 +128,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                l.setAnimation(loading_anim);
                 l.playAnimation();
                 loading_text.setText(txt);
                 inflay.setVisibility(View.VISIBLE);
