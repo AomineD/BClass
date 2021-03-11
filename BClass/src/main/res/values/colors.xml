@@ -8,6 +8,9 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+
+
+
     <style name="Autocomplete">
         <item name="colorControlNormal">@color/white</item>
         <item name="colorControlActivated">@color/white</item>

@@ -1,6 +1,9 @@
 package com.wineberryhalley.bclassapp;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +12,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class BottomBaseShet extends BottomSheetDialogFragment {
 
     public abstract int layoutID();
 
+    private String TAG = "MAIN";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(layoutID(), container, false);
+    View containeView = inflater.inflate(layoutID(), container, false);
+      //  Log.e(TAG, "onCreateView: aja" );
+    //  BottomSheetBehavior      mBottomSheetBehavior = BottomSheetBehavior.from(((View) containeView.getParent()));
+
+        return containeView;
     }
 
     @Override
@@ -27,11 +39,38 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogD);
     }
 
+    public boolean Modal(){
+        return false;
+    }
+
+    public int heightMax(){
+        return 120;
+    }
+
     private View mainView;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mainView = view;
+        if(Modal()) {
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if(getActivity() != null)
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                    if (BottomSheetBehavior.from(((View) view.getParent())) != null) {
+                        BottomSheetBehavior.from(((View) view.getParent())).setPeekHeight(dip2px(heightMax()));
+                        view.requestLayout();
+                    }
+
+                        }
+                    });
+                }
+            }, 200);
+        }
         OnStart();
     }
     public abstract void OnStart();
@@ -43,5 +82,22 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
     @Override
     public void show(@NonNull FragmentManager manager, @Nullable String tag) {
         super.show(manager, tag);
+    }
+
+
+    /**
+     * dip to px
+     */
+    private int dip2px(float dpValue) {
+        final float scale = getActivity().getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * px to dp
+     */
+    private int px2dip(float pxValue) {
+        final float scale =  getActivity().getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
     }
 }
