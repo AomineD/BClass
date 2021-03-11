@@ -48,6 +48,7 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
     }
 
     private View mainView;
+    private BottomSheetBehavior<View> bottomSheetBehavior;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -62,6 +63,7 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
                         public void run() {
 
                     if (BottomSheetBehavior.from(((View) view.getParent())) != null) {
+                        bottomSheetBehavior = BottomSheetBehavior.from(((View) view.getParent()));
                         BottomSheetBehavior.from(((View) view.getParent())).setPeekHeight(dip2px(heightMax()));
                         view.requestLayout();
                     }
@@ -99,5 +101,17 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
     private int px2dip(float pxValue) {
         final float scale =  getActivity().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+  public void expandModal(){
+        if(Modal() && bottomSheetBehavior != null){
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }
+  }
+
+    public void collapseModal(){
+        if(Modal() && bottomSheetBehavior != null){
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
     }
 }
