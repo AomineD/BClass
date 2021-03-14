@@ -2,4 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wineberryhalley.bclassapp">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application>
+        <provider
+            android:name=".notification.NotifProvider"
+            android:authorities="${applicationId}.notifprov"
+            android:exported="false"
+            android:label="LentItemsProvider" />
+    </application>
+
 </manifest>
