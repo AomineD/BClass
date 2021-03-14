@@ -6,10 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.wineberryhalley.bclassapp.R;
+
 public class DownloadNotification extends NotificationBase {
 
     public DownloadNotification(String title, String desc, int finalDrawable){
         finDrawa = finalDrawable;
+        init(title, desc, android.R.drawable.stat_sys_download, PriorityNotification.DEFAULT);
+        builder = getBuilder();
+    }
+
+    public DownloadNotification(String title, String desc){
+        finDrawa = R.drawable.ic_download;
         init(title, desc, android.R.drawable.stat_sys_download, PriorityNotification.DEFAULT);
         builder = getBuilder();
     }
