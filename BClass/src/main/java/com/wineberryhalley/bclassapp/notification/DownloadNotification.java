@@ -1,6 +1,9 @@
 package com.wineberryhalley.bclassapp.notification;
 
 import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Toast;
 
 public class DownloadNotification extends NotificationBase {
@@ -36,6 +39,19 @@ public class DownloadNotification extends NotificationBase {
     public void setOnFinished(String title, String desc){
         titleFinished = title;
         descFinished = desc;
+    }
+
+    public<T> void setOnClickNotification(Class<T> tClass){
+        Intent cont = new Intent(NotifProvider.context, tClass);
+        PendingIntent contentIntent = PendingIntent.getActivity(NotifProvider.context, 842,cont, 0);
+        builder.setContentIntent(contentIntent);
+    }
+
+    public<T> void setOnClickNotification(Class<T> tClass, Bundle args){
+        Intent cont = new Intent(NotifProvider.context, tClass);
+        cont.putExtras(args);
+        PendingIntent contentIntent = PendingIntent.getActivity(NotifProvider.context, 842,cont, 0);
+ builder.setContentIntent(contentIntent);
     }
 
     private Notification.Builder builder;

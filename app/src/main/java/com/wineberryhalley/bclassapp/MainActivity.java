@@ -18,6 +18,7 @@ public class MainActivity extends BaseActivity {
 DownloadNotification downloadNotification = new DownloadNotification("Downloading...", "Downloading video", R.drawable.ic_download);
 downloadNotification.setMaxProgress(50);
 downloadNotification.setOnFinished("Descargado", "Descarga completada");
+downloadNotification.setOnClickNotification(this.getClass());
 downloadNotification.show(203);
 new Timer().schedule(new TimerTask() {
     @Override
