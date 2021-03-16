@@ -71,7 +71,9 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
                         view.requestLayout();
                     }
                             }else{
+                                bottomSheetBehavior.setPeekHeight(dip2px(heightMax()));
                                 bottomSheetBehavior.setDraggable(false);
+                                view.requestLayout();
                             }
 
                         }
