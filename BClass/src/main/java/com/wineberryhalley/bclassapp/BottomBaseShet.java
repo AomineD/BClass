@@ -53,7 +53,7 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mainView = view;
-        bottomSheetBehavior = BottomSheetBehavior.from(((View) view.getParent()));
+
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -62,6 +62,7 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            bottomSheetBehavior = BottomSheetBehavior.from(((View) view.getParent()));
                             if(Modal()) {
                                 bottomSheetBehavior.setDraggable(true);
                     if (BottomSheetBehavior.from(((View) view.getParent())) != null) {
