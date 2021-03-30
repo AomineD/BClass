@@ -143,6 +143,14 @@ switch (stPermiss.length){
 
     public void showPermissionsRequest(OnDismissPermission a){
         this.dismissPermission = a;
+
+        int goHome = 0;
+        for (int i = 0; i < stPermiss.length; i++) {
+            if(ContextCompat.checkSelfPermission(getContext(), stPermiss[i]) == PackageManager.PERMISSION_GRANTED){
+                goHome++;
+            }
+        }
+        if(goHome < stPermiss.length)
         show(appCompatActivity.getSupportFragmentManager(), "permshowa");
     }
 
