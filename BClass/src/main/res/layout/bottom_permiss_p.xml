@@ -13,16 +13,25 @@
         android:orientation="vertical"
         >
 
+        <ImageView
+            android:id="@+id/close_"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            app:srcCompat="@drawable/close_ac"
+            app:tint="@color/back_inb" />
+
         <TextView
             android:id="@+id/tittl_perm"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/base_ttl_perms"
             android:textAlignment="center"
-            android:textColor="#2e2e2e"
+            android:textColor="@color/back_inb"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -34,7 +43,7 @@
             android:textAlignment="center"
             android:textSize="14sp"
             android:layout_marginTop="10dp"
-            android:textColor="#2e2e2e"
+            android:textColor="@color/back_inb"
             android:textStyle="normal"
             android:gravity="center"
             android:text="@string/write_default_perm"
@@ -47,10 +56,10 @@
             android:layout_height="wrap_content"
             app:spb_stateBackgroundColor="#BDBDBD"
             android:layout_gravity="center"
-            app:spb_stateForegroundColor="#009688"
+            app:spb_stateForegroundColor="@color/acctp"
             app:spb_stateNumberBackgroundColor="#808080"
             app:spb_stateNumberForegroundColor="#eeeeee"
-            app:spb_currentStateDescriptionColor="#009688"
+            app:spb_currentStateDescriptionColor="@color/acctp"
             app:spb_stateDescriptionColor="#808080"
             app:spb_animateToCurrentProgressState="true"
             app:spb_checkStateCompleted="true"/>
@@ -62,14 +71,14 @@
             android:layout_gravity="end"
             app:cardUseCompatPadding="true"
             app:cardElevation="8dp"
-            app:cardBackgroundColor="#2e2e2e"
+            app:cardBackgroundColor="@color/back_inb"
             android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/back_b_s"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:padding="15dp"

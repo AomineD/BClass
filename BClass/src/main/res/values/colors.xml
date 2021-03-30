@@ -18,7 +18,11 @@
 
     <color name="acctp">#234AD8</color>
     <color name="uncom">#CDCDCD</color>
+    <color name="back_b_s">#fff</color>
+    <color name="back_inb">#2e2e2e</color>
+
     <color name="white">#fff</color>
+
     <color name="black_trans_base">#D5000000</color>
 
     <declare-styleable name="ImageLoadingView">

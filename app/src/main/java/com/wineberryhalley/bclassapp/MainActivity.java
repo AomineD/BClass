@@ -36,7 +36,12 @@ new Timer().schedule(new TimerTask() {
 
         PermissionBottom b = new PermissionBottom(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA});
   b.setCustomDescriptionTo(0, "necesita permisos de escrituras para guardar fotos");
-   b.showPermissionsRequest();
+   b.showPermissionsRequest(new PermissionBottom.OnDismissPermission() {
+       @Override
+       public void OnDissmisResult(boolean okresult) {
+
+       }
+   });
 
         
     }

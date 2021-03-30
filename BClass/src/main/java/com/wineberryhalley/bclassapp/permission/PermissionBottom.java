@@ -141,9 +141,9 @@ switch (stPermiss.length){
     private String[] stPermiss;
     private ArrayList<PermissionModel> permissions = new ArrayList<>();
 
-    public void showPermissionsRequest(){
+    public void showPermissionsRequest(OnDismissPermission a){
+        this.dismissPermission = a;
         show(appCompatActivity.getSupportFragmentManager(), "permshowa");
-
     }
 
     @Override
@@ -156,6 +156,11 @@ switch (stPermiss.length){
         return false;
     }
 
+    public interface OnDismissPermission{
+        void OnDissmisResult(boolean okresult);
+    }
+
+    private OnDismissPermission dismissPermission;
     private String[] descriptionData;
     private StateProgressBar.StateNumber stateNumber;
     private TextView descr;
@@ -192,8 +197,22 @@ setpview.setStateNumberTextSize(13);
             checkPermissionIfSuccess();
         }else{
             Toast.makeText(appCompatActivity, "No permissions", Toast.LENGTH_SHORT).show();
-            dismissAllowingStateLoss();
+            closeNow();
         }
+        
+        ((View)find(R.id.close_)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeNow();
+            }
+        });
+    }
+    
+    private void closeNow(){
+        if(dismissPermission!=null){
+            dismissPermission.OnDissmisResult(false);
+        }
+        dismissAllowingStateLoss();
     }
 
     private void checkPermissionIfSuccess(){
@@ -248,6 +267,10 @@ requestPermissions(new String[]{stPermiss[p]}, 960);
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
+                if(dismissPermission!=null){
+                    dismissPermission.OnDissmisResult(true);
+                }
+
                dismissAllowingStateLoss();
             }
         }, 2300);
@@ -272,7 +295,7 @@ requestPermissions(new String[]{stPermiss[p]}, 960);
                 nextPermission();
             }
         }else{
-            dismissAllowingStateLoss();
+            closeNow();
         }
     }
 }
