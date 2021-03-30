@@ -48,6 +48,9 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.5.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    implementation 'com.github.baoyachi:StepView:1.9'
+    implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
+
     //aUTO
     annotationProcessor 'com.google.auto.value:auto-value:1.4'
     compileOnly 'com.jakewharton.auto.value:auto-value-annotations:1.4'

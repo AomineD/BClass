@@ -20,6 +20,7 @@ import java.util.TimerTask;
 
 public abstract class BottomBaseShet extends BottomSheetDialogFragment {
 
+
     public abstract int layoutID();
 
     private String TAG = "MAIN";
@@ -29,7 +30,6 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
     View containeView = inflater.inflate(layoutID(), container, false);
       //  Log.e(TAG, "onCreateView: aja" );
     //  BottomSheetBehavior      mBottomSheetBehavior = BottomSheetBehavior.from(((View) containeView.getParent()));
-
         return containeView;
     }
 
@@ -44,7 +44,7 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
     }
 
     public int heightMax(){
-        return 120;
+        return 0;
     }
 
     private View mainView;
@@ -71,7 +71,11 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
                         view.requestLayout();
                     }
                             }else{
-                                bottomSheetBehavior.setPeekHeight(dip2px(heightMax()));
+                                if(heightMax() == 0){
+                                    bottomSheetBehavior.setPeekHeight(mainView.getHeight());
+                                }else {
+                                    bottomSheetBehavior.setPeekHeight(dip2px(heightMax()));
+                                }
                                 bottomSheetBehavior.setDraggable(false);
                                 view.requestLayout();
                             }

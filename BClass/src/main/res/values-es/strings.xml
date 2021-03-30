@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="loading_base">Cargando, espera un poco por favor…</string>
+
+
+    <string name="give_prmms">OTORGAR</string>
+    <string name="write_pe_mission">Escritura</string>
+    <string name="sendsms_pe_mission">SMS</string>
+    <string name="camera_pe_mission">Cámara</string>
+    <string name="defafperme">Otros</string>
+    <string name="base_ttl_perms">Hola, %s necesita los siguientes permisos</string>
+    <string name="write_default_perm">%s necesita permisos de escritura para funcionar correctamente</string>
+    <string name="sendsms_default_perm">%s necesita permisos de enviar sms para funcionar correctamente</string>
+    <string name="camera_default_perm">%s necesita permisos de cámara para funcionar correctamente</string>
+    <string name="_default_perm">%s necesita este permiso para funcionar correctamente</string>
+    <string name="success_perm">Éxito</string>
+    <string name="success_perm_de">Todos los permisos necesarios fueron otorgados</string>
 </resources>

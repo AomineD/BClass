@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="loading_base">Loading, please wait…</string>
+    <string name="give_prmms">GRANT</string>
+    <string name="write_pe_mission">Write</string>
+    <string name="sendsms_pe_mission">Send SMS</string>
+    <string name="camera_pe_mission">Camera</string>
+    <string name="defafperme">Other</string>
+    <string name="base_ttl_perms">Hey %s needs the following permissions</string>
+    <string name="write_default_perm">%s needs write permission to save this</string>
+    <string name="sendsms_default_perm">%s needs sms permissions to work properly</string>
+    <string name="camera_default_perm">%s needs camera permissions to work properly</string>
+    <string name="_default_perm">%s needs this permission to work properly</string>
+    <string name="success_perm">Success</string>
+    <string name="success_perm_de">All necessary permits were granted</string>
 </resources>

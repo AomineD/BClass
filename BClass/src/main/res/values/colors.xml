@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="CustomBottomSheetDialogD" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStylea</item>
     </style>
 
-    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+    <style name="CustomBottomSheetStylea" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
 
@@ -16,6 +16,8 @@
         <item name="colorControlActivated">@color/white</item>
     </style>
 
+    <color name="acctp">#234AD8</color>
+    <color name="uncom">#CDCDCD</color>
     <color name="white">#fff</color>
     <color name="black_trans_base">#D5000000</color>
 
