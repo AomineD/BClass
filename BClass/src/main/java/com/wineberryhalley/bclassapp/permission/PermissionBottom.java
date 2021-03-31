@@ -12,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
-import com.baoyachi.stepview.HorizontalStepView;
-import com.baoyachi.stepview.bean.StepBean;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 import com.wineberryhalley.bclassapp.BottomBaseShet;
 import com.wineberryhalley.bclassapp.R;
