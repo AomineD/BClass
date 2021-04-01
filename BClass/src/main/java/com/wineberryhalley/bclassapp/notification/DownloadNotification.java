@@ -22,6 +22,7 @@ public class DownloadNotification extends NotificationBase {
         builder = getBuilder();
     }
 
+
     private int finDrawa;
     @Override
     protected boolean autoCancel() {
@@ -73,6 +74,11 @@ public class DownloadNotification extends NotificationBase {
 
 
     private Notification.Builder builder;
+
+    public int getMaxProgress() {
+        return maxProgress;
+    }
+
     private int maxProgress;
 
     public void setMaxProgress(int maxP){
