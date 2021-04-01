@@ -144,7 +144,7 @@ switch (stPermiss.length){
 
         int goHome = 0;
         for (int i = 0; i < stPermiss.length; i++) {
-            if(ContextCompat.checkSelfPermission(getContext(), stPermiss[i]) == PackageManager.PERMISSION_GRANTED){
+            if(ContextCompat.checkSelfPermission(appCompatActivity, stPermiss[i]) == PackageManager.PERMISSION_GRANTED){
                 goHome++;
             }
         }
