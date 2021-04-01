@@ -49,11 +49,20 @@ public class DownloadNotification extends NotificationBase {
         descFinished = desc;
     }
 
+    private String tterror;
+    private String descError;
+    public void setOnError(String title, String desc){
+        tterror = title;
+        descError = desc;
+    }
+
+
     public<T> void setOnClickNotification(Class<T> tClass){
         Intent cont = new Intent(NotifProvider.context, tClass);
         PendingIntent contentIntent = PendingIntent.getActivity(NotifProvider.context, 842,cont, 0);
         builder.setContentIntent(contentIntent);
     }
+
 
     public<T> void setOnClickNotification(Class<T> tClass, Bundle args){
         Intent cont = new Intent(NotifProvider.context, tClass);
@@ -62,12 +71,15 @@ public class DownloadNotification extends NotificationBase {
  builder.setContentIntent(contentIntent);
     }
 
+
     private Notification.Builder builder;
     private int maxProgress;
+
     public void setMaxProgress(int maxP){
          builder.setProgress(maxP, 0, true);
    maxProgress = maxP;
     }
+
     private int normalId;
     public void show(int id){
         normalId = id;
@@ -88,6 +100,14 @@ public class DownloadNotification extends NotificationBase {
                 showNotificationBuild(normalId, builder);
             }
         }
+    }
+
+    public void errorProgress(){
+        builder.setProgress(0, 0, false);
+        builder.setContentText(descError);
+        builder.setContentTitle(tterror);
+        builder.setSmallIcon(finDrawa);
+        showNotificationBuild(normalId, builder);
     }
 
 
