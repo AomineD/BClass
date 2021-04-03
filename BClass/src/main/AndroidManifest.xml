@@ -10,6 +10,13 @@
             android:authorities="${applicationId}.notifprov"
             android:exported="false"
             android:label="LentItemsProvider" />
+
+        <provider
+            android:name=".baseapi.BaseProviderApp"
+            android:authorities="${applicationId}.base.prov"
+            android:exported="false"
+            android:label="LentItemsProvider" />
+
     </application>
 
 </manifest>
