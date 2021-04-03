@@ -36,6 +36,14 @@ public class ImageLoadingView extends RelativeLayout {
         }
     }
 
+    public ImageView getImg(){
+        return img;
+    }
+
+    public LottieAnimationView getLottie(){
+        return loading_root;
+    }
+
     public void hideLoading(){
         if(loading_root != null){
             loading_root.setVisibility(GONE);
