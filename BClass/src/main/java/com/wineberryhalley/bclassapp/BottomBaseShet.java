@@ -136,4 +136,13 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
         if(Modal() && bottomSheetBehavior != null)
         bottomSheetBehavior.setPeekHeight(dip2px(dp), true);
     }
+
+    public void requestNewSize(){
+        if(heightMax() == 0){
+            bottomSheetBehavior.setPeekHeight(mainView.getHeight());
+        }else {
+            bottomSheetBehavior.setPeekHeight(dip2px(heightMax()));
+        }
+        mainView.requestLayout();
+    }
 }
