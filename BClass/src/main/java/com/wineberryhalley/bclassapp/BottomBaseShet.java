@@ -76,6 +76,7 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
                                 }else {
                                     bottomSheetBehavior.setPeekHeight(dip2px(heightMax()));
                                 }
+                                Log.e(TAG, "run: "+mainView.getHeight() );
                                 bottomSheetBehavior.setDraggable(false);
                                 view.requestLayout();
                             }
@@ -137,12 +138,14 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
         bottomSheetBehavior.setPeekHeight(dip2px(dp), true);
     }
 
+
     public void requestNewSize(){
         if(heightMax() == 0){
             bottomSheetBehavior.setPeekHeight(mainView.getHeight());
         }else {
             bottomSheetBehavior.setPeekHeight(dip2px(heightMax()));
         }
+        Log.e(TAG, "requestNewSize: "+mainView.getHeight() +", m: "+mainView.getMeasuredHeight());
         mainView.requestLayout();
     }
 }
