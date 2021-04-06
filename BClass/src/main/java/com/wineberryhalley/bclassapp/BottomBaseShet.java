@@ -140,14 +140,26 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
 
 
     public void requestNewSize(){
-        mainView.requestLayout();
-        if(heightMax() == 0){
-            bottomSheetBehavior.setPeekHeight(mainView.getHeight());
-        }else {
-            bottomSheetBehavior.setPeekHeight(dip2px(heightMax()));
-        }
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                       // mainView.requestLayout();
+                        if(heightMax() == 0){
+                            bottomSheetBehavior.setPeekHeight(mainView.getHeight());
+                        }else {
+                            bottomSheetBehavior.setPeekHeight(dip2px(heightMax()));
+                        }
+                        mainView.requestLayout();
+                    }
+                });
+            }
+        }, 100);
 
 
-        Log.e(TAG, "requestNewSize: "+mainView.getHeight() +", m: "+mainView.getMeasuredHeight());
+
+        Log.e(TAG, "requestNewSize: "+mainView.getHeight());
     }
 }
