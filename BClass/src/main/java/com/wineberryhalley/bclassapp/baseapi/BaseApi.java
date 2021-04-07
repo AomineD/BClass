@@ -99,14 +99,30 @@ return context;
                 break;
 
             case POST:
-                JSONObject jsonObject = new JSONObject(map);
-                JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.POST, finalUrl, jsonObject, new Response.Listener<JSONObject>() {
+                StringRequest jsonObjectRequest1 = new StringRequest(Request.Method.POST, finalUrl, new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(String responsea) {
+
+                        JSONObject response = null;
+                        try {
+                            response = new JSONObject(responsea);
+
+
                         T ob = new Gson().fromJson(response.toString(), tClass);
 
                         if(listener != null){
                             listener.OnLoadSuccess(ob);
+                        }
+
+                        } catch (JSONException e) {
+                            if(listener != null){
+                                listener.OnError(e.getMessage());
+                            }
+
+                            if(multiple != null){
+                                multiple.OnError(e.getMessage());
+                            }
+                            e.printStackTrace();
                         }
 
                     }
@@ -121,7 +137,12 @@ return context;
                             multiple.OnError(error.getMessage());
                         }
                     }
-                });
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        return map;
+                    }
+                };
                 queue.add(jsonObjectRequest1);
                 break;
         }
@@ -225,7 +246,7 @@ return context;
     }
 
     private void goString(RequestType type) {
-        Log.e("MAIN", "goString: "+type.name()+" url "+finalUrl );
+   //     Log.e("MAIN", "goString: "+type.name()+" url "+finalUrl );
         switch (type){
             case GET:
                 StringRequest jsonObjectRequest = new StringRequest(Request.Method.GET, finalUrl, new Response.Listener<String>() {
