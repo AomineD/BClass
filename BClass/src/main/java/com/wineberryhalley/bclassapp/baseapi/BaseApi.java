@@ -102,17 +102,20 @@ return context;
                 StringRequest jsonObjectRequest1 = new StringRequest(Request.Method.POST, finalUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String responsea) {
-
+                      //  Log.e("MAIN", "onResponse: "+responsea );
                         JSONObject response = null;
                         try {
                             response = new JSONObject(responsea);
 
 
-                        T ob = new Gson().fromJson(response.toString(), tClass);
-
-                        if(listener != null){
-                            listener.OnLoadSuccess(ob);
-                        }
+                            if(tClass != JSONObject.class) {
+                                T ob = new Gson().fromJson(response.toString(), tClass);
+                                if(listener != null){
+                                    listener.OnLoadSuccess(ob);
+                                }
+                            }else{
+    listener.OnLoadSuccess((T) response);
+                            }
 
                         } catch (JSONException e) {
                             if(listener != null){

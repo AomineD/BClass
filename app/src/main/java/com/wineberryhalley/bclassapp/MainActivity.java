@@ -17,6 +17,7 @@ import android.util.Log;
 
 import com.baoyachi.stepview.HorizontalStepView;
 import com.baoyachi.stepview.bean.StepBean;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.wineberryhalley.bclassapp.baseapi.BaseApi;
 import com.wineberryhalley.bclassapp.baseapi.Interfaces;
 import com.wineberryhalley.bclassapp.baseapi.ObjectType;
@@ -33,54 +34,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void Main() {
-/*
-DownloadNotification downloadNotification = new DownloadNotification("Downloading...", "Downloading video", R.drawable.ic_download);
-downloadNotification.setMaxProgress(50);
-downloadNotification.setOnFinished("Descargado", "Descarga completada");
-downloadNotification.setOnClickNotification(this.getClass());
-downloadNotification.show(203);
-new Timer().schedule(new TimerTask() {
-    @Override
-    public void run() {
-        int prg = downloadNotification.getProgressActual() + 10;
-        downloadNotification.updateProgress(prg);
-    }
-}, 1500, 1500);*/
 
-
-   /*     PermissionBottom b = new PermissionBottom(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA});
-  b.setCustomDescriptionTo(0, "necesita permisos de escrituras para guardar fotos");
-   b.showPermissionsRequest(new PermissionBottom.OnDismissPermission() {
-       @Override
-       public void OnDissmisResult(boolean okresult) {
-
-       }
-   });
-
-
-     BaseApi<?> baseApi =   new BaseApi.ApiBuilder<Country>("https://restcountries.eu/rest/", "v2/all")
-             .setListener(new Interfaces.MultipleObjectListener<Country>(){
-                 @Override
-                 public void OnLoadSuccess(ArrayList<Country> models) {
-                     super.OnLoadSuccess(models);
-                     for (Country c:
-                          models) {
-                         Log.e("MAIN", "OnLoadSuccess: "+c.getName() );
-                     }
-                 }
-
-                 @Override
-                 public void OnError(String erno) {
-                     super.OnError(erno);
-                     Log.e("MAIN", "OnError: "+erno );
-                 }
-             })
-        .build(ObjectType.JsonArray, Country.class);
-
-     baseApi.executeUrl()*/
-
-
-
+     /*   ImagePicker.Companion.with(this)
+                .crop()	    			//Crop image(Optional), Check Customization for more option
+                .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                .start();
+    */
     }
 
     @Override
@@ -103,6 +63,62 @@ new Timer().schedule(new TimerTask() {
 
     }
 
+    private String profileUri;
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            //Image Uri will not be null for RESULT_OK
+            Uri fileUri = data.getData();
+
+
+            //You can get File object from intent
+            //val file:File = ImagePicker.getFile(data)!!
+
+            //You can also get File Path from intent
+            profileUri = ImagePicker.Companion.getFilePath(data);
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), fileUri);
+            } catch (IOException e) {
+                Log.e("MAIN", "onActivityResult: "+e.getMessage() );
+                e.printStackTrace();
+            }
+            Bitmap lastBitmap = null;
+            lastBitmap = bitmap;
+            //encoding image to string
+            if(lastBitmap != null)
+                profileUri = getStringImage(lastBitmap);
+            //  Log.e("MAIN", "onActivityResult: "+profileUri);
+
+            PicassoUtils.uploadImage(profileUri, "non", new PicassoUtils.UploadListener() {
+                @Override
+                public void OnSuccess(String url) {
+                    Log.e(TAG, "OnSuccess: "+url );
+                }
+
+                @Override
+                public void OnError(String erno) {
+                    Log.e(TAG, "OnError: "+erno );
+                }
+            });
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Log.e("MAIN", "onActivityResult: f" );
+        } else {
+
+        }
+    }
+
+
+    private String TAG ="MAIN";
+
+    public String getStringImage(Bitmap bmp) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+
+    }
 
 
 

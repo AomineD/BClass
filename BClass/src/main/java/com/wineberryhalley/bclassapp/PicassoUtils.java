@@ -292,6 +292,7 @@ public static void uploadImage(String base64, String name, UploadListener listen
                 @Override
                 public void OnLoadSuccess(JSONObject models) {
                     super.OnLoadSuccess(models);
+             //       Log.e("MAIN", "OnLoadSuccess: "+models );
                     try {
                         if (models.has("error") && models.getJSONObject("error").has("message")) {
 listener.OnError(models.getJSONObject("error").getString("message"));
