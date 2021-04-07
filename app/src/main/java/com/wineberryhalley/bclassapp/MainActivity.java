@@ -39,7 +39,7 @@ new Timer().schedule(new TimerTask() {
 }, 1500, 1500);*/
 
 
-        PermissionBottom b = new PermissionBottom(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA});
+   /*     PermissionBottom b = new PermissionBottom(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA});
   b.setCustomDescriptionTo(0, "necesita permisos de escrituras para guardar fotos");
    b.showPermissionsRequest(new PermissionBottom.OnDismissPermission() {
        @Override
@@ -68,7 +68,7 @@ new Timer().schedule(new TimerTask() {
              })
         .build(ObjectType.JsonArray, Country.class);
 
-     baseApi.executeUrl();
+     baseApi.executeUrl()*/
 
     }
 

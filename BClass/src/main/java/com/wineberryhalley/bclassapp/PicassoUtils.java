@@ -8,6 +8,14 @@ import android.widget.ImageView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.wineberryhalley.bclassapp.baseapi.BaseApi;
+import com.wineberryhalley.bclassapp.baseapi.Interfaces;
+import com.wineberryhalley.bclassapp.baseapi.ObjectType;
+import com.wineberryhalley.bclassapp.baseapi.RequestType;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
@@ -268,4 +276,38 @@ public static void loadImageIn(String img, ImageView imgview){
         });
 
 }
+
+
+private static String apike = "79d54c96b390d98b80dbe6ca12d83615";
+
+public interface UploadListener{
+    void OnSuccess(String url);
+    void OnError(String erno);
+}
+public static void uploadImage(String base64, String name, UploadListener listener) {
+    String url = "https://api.imgbb.com/1/upload?key=";
+
+    BaseApi baseApi = new BaseApi.ApiBuilder<JSONArray>(url, apike)
+            .setListener(new Interfaces.SingleListener<JSONArray>() {
+                @Override
+                public void OnLoadSuccess(JSONArray models) {
+                    super.OnLoadSuccess(models);
+                    listener.OnSuccess("si");
+                }
+
+                @Override
+                public void OnError(String erno) {
+                    super.OnError(erno);
+                    listener.OnError(erno);
+                }
+            })
+            .requestType(RequestType.POST)
+
+            .postParam("name", name)
+            .postParam("image", base64)
+            .build(ObjectType.JsonArray, JSONArray.class)
+            ;
+
+}
+
 }
