@@ -76,7 +76,6 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
                                 }else {
                                     bottomSheetBehavior.setPeekHeight(dip2px(heightMax()));
                                 }
-                                Log.e(TAG, "run: "+mainView.getHeight() );
                                 bottomSheetBehavior.setDraggable(false);
                                 view.requestLayout();
                             }
@@ -158,8 +157,5 @@ public abstract class BottomBaseShet extends BottomSheetDialogFragment {
             }
         }, 100);
 
-
-
-        Log.e(TAG, "requestNewSize: "+mainView.getHeight());
     }
 }

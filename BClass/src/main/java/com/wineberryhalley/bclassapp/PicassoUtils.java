@@ -138,6 +138,26 @@ public static void loadImageIn(String img, ImageView imgview){
         });
     }
 
+
+    public static void loadCircleFromUri(Uri img, ImageLoadingView image){
+        // imgview.getRootView();
+        //  Log.e("MAIN", "loadImageWithLoading: "+imgview.getRootView().getClass().getSimpleName());
+        //lt.setVisibility(View.VISIBLE);
+        image.getImg().setVisibility(View.VISIBLE);
+        Picasso.get().load(img).fit().transform(new CropCircleTransformation()).into(image.getImg(), new Callback() {
+            @Override
+            public void onSuccess() {
+                image.getImg().setVisibility(View.VISIBLE);
+                image.getLottie().setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                image.getLottie().setVisibility(View.GONE);
+            }
+        });
+    }
+
     public static void loadImageWithLoading(int img, int rounded,ImageView imgview, LottieAnimationView lt){
         // imgview.getRootView();
         //  Log.e("MAIN", "loadImageWithLoading: "+imgview.getRootView().getClass().getSimpleName());
