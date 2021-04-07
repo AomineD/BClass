@@ -308,6 +308,7 @@ public static void uploadImage(String base64, String name, UploadListener listen
             .build(ObjectType.JsonArray, JSONArray.class)
             ;
 
+    baseApi.executeUrl();
 }
 
 }
