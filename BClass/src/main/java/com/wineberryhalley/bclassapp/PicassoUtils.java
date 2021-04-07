@@ -292,7 +292,16 @@ public static void uploadImage(String base64, String name, UploadListener listen
                 @Override
                 public void OnLoadSuccess(JSONObject models) {
                     super.OnLoadSuccess(models);
-                    listener.OnSuccess("si");
+                    try {
+                        if (models.has("error") && models.getJSONObject("error").has("message")) {
+listener.OnError(models.getJSONObject("error").getString("message"));
+                        } else if(models.has("data")){
+                            listener.OnSuccess(models.getJSONObject("data").getString("url"));
+                        }
+                    } catch (JSONException e) {
+                        listener.OnError("Success but: "+e.getMessage());
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
