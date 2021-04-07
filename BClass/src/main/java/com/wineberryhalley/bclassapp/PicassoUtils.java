@@ -297,6 +297,8 @@ public static void uploadImage(String base64, String name, UploadListener listen
 listener.OnError(models.getJSONObject("error").getString("message"));
                         } else if(models.has("data")){
                             listener.OnSuccess(models.getJSONObject("data").getString("url"));
+                        }else{
+                            listener.OnError(models.toString());
                         }
                     } catch (JSONException e) {
                         listener.OnError("Success but: "+e.getMessage());
