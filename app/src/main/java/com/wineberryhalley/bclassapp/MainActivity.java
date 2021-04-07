@@ -1,11 +1,18 @@
 package com.wineberryhalley.bclassapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Movie;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 
 import com.baoyachi.stepview.HorizontalStepView;
@@ -16,6 +23,8 @@ import com.wineberryhalley.bclassapp.baseapi.ObjectType;
 import com.wineberryhalley.bclassapp.notification.DownloadNotification;
 import com.wineberryhalley.bclassapp.permission.PermissionBottom;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -70,6 +79,8 @@ new Timer().schedule(new TimerTask() {
 
      baseApi.executeUrl()*/
 
+
+
     }
 
     @Override
@@ -91,5 +102,8 @@ new Timer().schedule(new TimerTask() {
     public void onReceiveValues(ArrayList<String> values) {
 
     }
+
+
+
 
 }

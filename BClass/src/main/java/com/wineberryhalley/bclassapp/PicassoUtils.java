@@ -287,10 +287,10 @@ public interface UploadListener{
 public static void uploadImage(String base64, String name, UploadListener listener) {
     String url = "https://api.imgbb.com/1/upload?key=";
 
-    BaseApi baseApi = new BaseApi.ApiBuilder<JSONArray>(url, apike)
-            .setListener(new Interfaces.SingleListener<JSONArray>() {
+    BaseApi baseApi = new BaseApi.ApiBuilder<JSONObject>(url, apike)
+            .setListener(new Interfaces.SingleListener<JSONObject>() {
                 @Override
-                public void OnLoadSuccess(JSONArray models) {
+                public void OnLoadSuccess(JSONObject models) {
                     super.OnLoadSuccess(models);
                     listener.OnSuccess("si");
                 }
@@ -305,7 +305,7 @@ public static void uploadImage(String base64, String name, UploadListener listen
 
             .postParam("name", name)
             .postParam("image", base64)
-            .build(ObjectType.JsonArray, JSONArray.class)
+            .build(ObjectType.JsonOBJECT, JSONObject.class)
             ;
 
     baseApi.executeUrl();

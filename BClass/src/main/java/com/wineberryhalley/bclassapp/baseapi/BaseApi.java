@@ -192,6 +192,9 @@ return context;
                             if(multiple != null) {
                                 multiple.OnError(e.getMessage());
                             }
+                            if(listener != null){
+                                listener.OnError(e.getMessage());
+                            }
                             e.printStackTrace();
                         }
                     }
