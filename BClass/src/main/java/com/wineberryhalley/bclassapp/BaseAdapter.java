@@ -37,6 +37,17 @@ public  abstract class BaseAdapter<T, L> extends RecyclerView.Adapter<RecyclerVi
 
 
 
+    public View.OnClickListener getDefaultClickPos(int pos){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(clickPos != null){
+                    clickPos.clickPos(pos, ls.get(pos));
+                }
+            }
+        };
+    }
+
    public interface onClickPos<L>{
        void clickPos(int pos, L model);
    }

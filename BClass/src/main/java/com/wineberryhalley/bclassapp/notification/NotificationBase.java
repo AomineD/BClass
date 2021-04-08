@@ -117,6 +117,22 @@ public void showNotification(int id) {
         }
     }
 
+    public void hideNotification(int id, Notification.Builder builder){
+        if (builder != null) {
+            NotificationManager notificationManager = NotificationUtil.getNotificationManager();
+        showed = false;
+            notificationManager.cancel(id);
+        }
+    }
+
+    public void hideNotification(int id){
+        if (notification != null) {
+            NotificationManager notificationManager = NotificationUtil.getNotificationManager();
+            showed = false;
+            notificationManager.cancel(id);
+        }
+    }
+
 protected void setNotification(Notification notification){
         this.notification = notification;
 }
@@ -141,10 +157,16 @@ private int getRealPriority(){
             return Notification.PRIORITY_HIGH;
         case DEFAULT:
             return Notification.PRIORITY_DEFAULT;
+        case MIN:
+            return Notification.PRIORITY_MIN;
+        case MAX:
+            return Notification.PRIORITY_MAX;
         default:
             return Notification.PRIORITY_DEFAULT;
     }
 }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private int getManagerPriority(){
@@ -155,6 +177,10 @@ private int getRealPriority(){
                 return NotificationManager.IMPORTANCE_HIGH;
             case DEFAULT:
                 return NotificationManager.IMPORTANCE_DEFAULT;
+            case MIN:
+                return NotificationManager.IMPORTANCE_MIN;
+            case MAX:
+                return NotificationManager.IMPORTANCE_MAX;
             default:
                 return NotificationManager.IMPORTANCE_DEFAULT;
         }

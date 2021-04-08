@@ -26,6 +26,20 @@ public class DownloadNotification extends NotificationBase {
         builder = getBuilder();
     }
 
+    public DownloadNotification(String title, String desc, PriorityNotification priorityNotification){
+        finDrawa = R.drawable.ic_download;
+        this.title = title;
+        this.desc = desc;
+        init(title, desc, android.R.drawable.stat_sys_download, priorityNotification);
+        builder = getBuilder();
+    }
+
+
+    public void changePriority(PriorityNotification priorityNotification){
+        init(title, desc, android.R.drawable.stat_sys_download, priorityNotification);
+        builder = getBuilder();
+    }
+
     private String title;
     private String desc;
 
@@ -129,5 +143,8 @@ public class DownloadNotification extends NotificationBase {
         showNotificationBuild(normalId, builder);
     }
 
+    public void hide(){
+        hideNotification(normalId, builder);
+    }
 
 }
