@@ -12,15 +12,22 @@ public class DownloadNotification extends NotificationBase {
 
     public DownloadNotification(String title, String desc, int finalDrawable){
         finDrawa = finalDrawable;
+        this.title = title;
+        this.desc = desc;
         init(title, desc, android.R.drawable.stat_sys_download, PriorityNotification.DEFAULT);
         builder = getBuilder();
     }
 
     public DownloadNotification(String title, String desc){
         finDrawa = R.drawable.ic_download;
+        this.title = title;
+        this.desc = desc;
         init(title, desc, android.R.drawable.stat_sys_download, PriorityNotification.DEFAULT);
         builder = getBuilder();
     }
+
+    private String title;
+    private String desc;
 
 
     private int finDrawa;
@@ -81,6 +88,11 @@ public class DownloadNotification extends NotificationBase {
 
     private int maxProgress;
 
+    private void goLow(){
+        init(title, desc, android.R.drawable.stat_sys_download, PriorityNotification.LOW);
+        builder = getBuilder();
+    }
+
     public void setMaxProgress(int maxP){
          builder.setProgress(maxP, 0, true);
    maxProgress = maxP;
@@ -94,6 +106,7 @@ public class DownloadNotification extends NotificationBase {
 
     public void updateProgress(int progress) {
         if (normalId != 0) {
+            goLow();
             progressActual = progress;
             if (progress < maxProgress) {
                 builder.setProgress(maxProgress, progress, false);

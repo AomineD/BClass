@@ -269,6 +269,7 @@ requestPermissions(new String[]{stPermiss[p]}, 960);
     {
         titl.setText(R.string.success_perm);
         descr.setText(R.string.success_perm_de);
+        btn.setVisibility(View.GONE);
         setpview.setAllStatesCompleted(true);
         new Timer().schedule(new TimerTask() {
             @Override
