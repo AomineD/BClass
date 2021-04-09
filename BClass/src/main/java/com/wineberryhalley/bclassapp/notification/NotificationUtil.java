@@ -18,7 +18,7 @@ public class NotificationUtil {
         channel.setDescription("Channel one desc");
         NotificationManager notificationManager = getSystemService(NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannel(channel);
-        Log.e("MAIN", "initNotifications: listo "+channelId );
+  //      Log.e("MAIN", "initNotifications: listo "+channelId );
     }
 
 
