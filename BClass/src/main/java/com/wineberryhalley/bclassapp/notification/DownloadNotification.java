@@ -93,6 +93,15 @@ public class DownloadNotification extends NotificationBase {
  builder.setContentIntent(contentIntent);
     }
 
+    public<T> void setClickWhenFinish(Class<T> tClass, Bundle args){
+        Intent cont = new Intent(NotifProvider.context, tClass);
+        cont.putExtras(args);
+        finalPend = PendingIntent.getActivity(NotifProvider.context, 842,cont, 0);
+        //builder.setContentIntent(contentIntent);
+    }
+
+    private PendingIntent finalPend;
+
 
     private Notification.Builder builder;
 
@@ -130,6 +139,9 @@ public class DownloadNotification extends NotificationBase {
                 builder.setContentText(descFinished);
                 builder.setContentTitle(titleFinished);
                 builder.setSmallIcon(finDrawa);
+                if(finalPend != null){
+                    builder.setContentIntent(finalPend);
+                }
                 showNotificationBuild(normalId, builder);
             }
         }

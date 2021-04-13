@@ -2,7 +2,10 @@ package com.wineberryhalley.bclassapp.notification;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -17,6 +20,7 @@ protected String title;
     protected int DrawableRes;
     protected PriorityNotification priorityNotification = PriorityNotification.DEFAULT;
     private boolean showed = false;
+    private BaseBroadcast broadcast;
 
     private String chanId;
     protected void init(String title, String desc, int drawable, PriorityNotification prioti){
@@ -74,11 +78,35 @@ private boolean builded = false;
 
     protected Notification.Builder getBuilder(){
         if(initialized) {
+
+            return getBaseBuilder();
+        }else{
+            return null;
+        }
+    }
+
+
+    protected Notification.Builder getBuilderMoreDesc(String expandable){
+        if(initialized) {
+            Notification.Builder b = getBaseBuilder();
+            b.setStyle(new Notification.BigTextStyle()
+                    .bigText(expandable));
+
+            return b;
+        }else{
+            return null;
+        }
+    }
+
+    private Notification.Builder getBaseBuilder(){
+
+
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
                 return new Notification.Builder(NotifProvider.context, chanId)
                         .setContentTitle(title)
                         .setContentText(desc)
+
                         .setSmallIcon(DrawableRes)
                         .setAutoCancel(autoCancel());
             }else{
@@ -89,12 +117,7 @@ private boolean builded = false;
                         .setPriority(getRealPriority())
                         .setAutoCancel(autoCancel());
             }
-        }else{
-            return null;
-        }
     }
-
-
 
 
 public void showNotification(int id) {
@@ -106,6 +129,7 @@ public void showNotification(int id) {
         onShow();
     }
 }
+
 
     public void showNotificationBuild(int id, Notification.Builder builder) {
         if (builder != null) {
@@ -184,6 +208,34 @@ private int getRealPriority(){
             default:
                 return NotificationManager.IMPORTANCE_DEFAULT;
         }
+    }
+
+    protected void setBroadcast(BaseBroadcast b, int pos,Notification.Builder bk){
+        Intent br = new Intent(NotifProvider.context, BaseBroadcast.class);
+        br.setAction(b.actions().get(pos));
+   PendingIntent pendingIntent =     PendingIntent.getBroadcast(NotifProvider.context, 443, br, PendingIntent.FLAG_UPDATE_CURRENT);
+        bk.setContentIntent(pendingIntent);
+    }
+
+    protected void setBroadcast(BaseBroadcast b,Notification.Builder bk){
+        Intent br = new Intent(NotifProvider.context, BaseBroadcast.class);
+        br.setAction(b.actions().get(0));
+        PendingIntent pendingIntent =     PendingIntent.getBroadcast(NotifProvider.context, 443, br, PendingIntent.FLAG_UPDATE_CURRENT);
+        bk.setContentIntent(pendingIntent);
+    }
+
+    public<T> void setOnClickNotificationBase(Class<T> tClass, Notification.Builder builder){
+        Intent cont = new Intent(NotifProvider.context, tClass);
+        PendingIntent contentIntent = PendingIntent.getActivity(NotifProvider.context, 842,cont, 0);
+        builder.setContentIntent(contentIntent);
+    }
+
+
+    public<T> void setOnClickNotificationBase(Class<T> tClass, Bundle args, Notification.Builder builder){
+        Intent cont = new Intent(NotifProvider.context, tClass);
+        cont.putExtras(args);
+        PendingIntent contentIntent = PendingIntent.getActivity(NotifProvider.context, 842,cont, 0);
+        builder.setContentIntent(contentIntent);
     }
 
 }

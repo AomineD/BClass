@@ -41,6 +41,11 @@ public class MainActivity extends BaseActivity {
                 .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
                 .start();
     */
+
+
+        DownloadNotification downloadNotification = new DownloadNotification("Download", "ah");
+
+        downloadNotification.setMaxProgress(100);
     }
 
     @Override
