@@ -118,6 +118,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             @Override
             public void run() {
                 l.setAnimation(loading_anim);
+                loading_text.setText(R.string.loading_base);
                 l.playAnimation();
                 inflay.setVisibility(View.VISIBLE);
             }
