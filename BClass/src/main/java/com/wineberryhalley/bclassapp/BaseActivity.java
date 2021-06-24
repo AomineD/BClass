@@ -91,18 +91,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected boolean receiveNotification = false;
 
     private void handleNotifIfExist() {
-        if(getIntent() != null && getIntent().getExtras() != null && keysNotification() != null){
+        if(getIntent() != null && getIntent().getExtras() != null){
             Bundle b = getIntent().getExtras();
             ArrayList<PushInfo> vars = new ArrayList<>();
             receiveNotification = true;
-            for(int i=0; i < keysNotification().size(); i++) {
-                if (b.containsKey(keysNotification().get(i))) {
+
+            for (String key:
+                 b.keySet()) {
                     PushInfo info = new PushInfo();
-                    info.setKey(keysNotification().get(i));
-                    String var = b.getString(keysNotification().get(i));
+                    info.setKey(key);
+                    String var = b.getString(key);
                     info.setInfo(var);
-                }
             }
+
             if(vars.size() > 0)
             onReceiveValues(vars);
 
