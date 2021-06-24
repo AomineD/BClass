@@ -102,6 +102,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                     info.setKey(key);
                     String var = b.getString(key);
                     info.setInfo(var);
+                    vars.add(info);
             }
 
             if(vars.size() > 0)
