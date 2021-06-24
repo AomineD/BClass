@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.messaging.RemoteMessage;
+import com.wineberryhalley.bclassapp.push.PushInfo;
 
 import org.json.JSONObject;
 
@@ -25,10 +26,17 @@ import java.util.zip.Inflater;
 
 public abstract class BaseActivity extends AppCompatActivity {
     public abstract void Main();
-    public abstract void statusChanged(int pixelesSizeBar);
+    public void statusChanged(int pixelesSizeBar){
+
+    }
     public abstract int resLayout();
-    public abstract ArrayList<String> keysNotification();
-    public abstract void onReceiveValues(ArrayList<String> values);
+    public ArrayList<String> keysNotification(){
+        return null;
+    }
+
+    public void onReceiveValues(ArrayList<PushInfo> values){
+
+    }
 
     public void onNotificationReceived(RemoteMessage.Notification n, Bundle datos){
 
@@ -85,12 +93,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void handleNotifIfExist() {
         if(getIntent() != null && getIntent().getExtras() != null && keysNotification() != null){
             Bundle b = getIntent().getExtras();
-            ArrayList<String> vars = new ArrayList<>();
+            ArrayList<PushInfo> vars = new ArrayList<>();
             receiveNotification = true;
             for(int i=0; i < keysNotification().size(); i++) {
                 if (b.containsKey(keysNotification().get(i))) {
+                    PushInfo info = new PushInfo();
+                    info.setKey(keysNotification().get(i));
                     String var = b.getString(keysNotification().get(i));
-                    vars.add(var);
+                    info.setInfo(var);
                 }
             }
             if(vars.size() > 0)
@@ -142,6 +152,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             @Override
             public void run() {
         l.setAnimation(assetName);
+                loading_text.setText(R.string.loading_base);
         l.playAnimation();
         inflay.setVisibility(View.VISIBLE);
             }
@@ -165,6 +176,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             @Override
             public void run() {
         l.setRepeatCount(1);
+                loading_text.setText(R.string.loading_base);
         l.setAnimation(assetName);
         l.playAnimation();
         inflay.setVisibility(View.VISIBLE);
