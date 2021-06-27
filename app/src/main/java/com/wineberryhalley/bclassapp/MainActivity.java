@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.baoyachi.stepview.HorizontalStepView;
 import com.baoyachi.stepview.bean.StepBean;
@@ -22,6 +24,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.wineberryhalley.bclassapp.baseapi.BaseApi;
 import com.wineberryhalley.bclassapp.baseapi.Interfaces;
 import com.wineberryhalley.bclassapp.baseapi.ObjectType;
+import com.wineberryhalley.bclassapp.captcha.CaptchaRevealer;
 import com.wineberryhalley.bclassapp.captcha.WineCaptcha;
 import com.wineberryhalley.bclassapp.notification.DownloadNotification;
 import com.wineberryhalley.bclassapp.nuevo.RecyclerNatives;
@@ -50,38 +53,37 @@ public class MainActivity extends BaseActivity {
 
         downloadNotification.setMaxProgress(100);*/
 
-        WineCaptcha.getOn(this).config()
-                .show(findViewById(R.id.capt), new WineCaptcha.CaptchaListener() {
-                    @Override
-                    public void onButtonClick() {
+        CaptchaRevealer rev = findViewById(R.id.ca);
 
-                    }
+        rev.reveal(this, new WineCaptcha.CaptchaListener() {
+            @Override
+            public void onButtonClick() {
 
-                    @Override
-                    public void onSuccess(String s) {
-                        Log.e(TAG, "onSuccess: " );
-                    }
+            }
 
-                    @Override
-                    public void onClosed(int i) {
+            @Override
+            public void onSuccess(String s) {
 
-                    }
+            }
 
-                    @Override
-                    public void onFailed(String erno) {
-                        Log.e(TAG, "onFailed: "+erno );
-                    }
-                });
+            @Override
+            public void onClosed(int i) {
 
+            }
 
-        RecyclerNatives recyclerNatives = findViewById(R.id.rec_nativ);
+            @Override
+            public void onFailed(String erno) {
+              //  Log.e(TAG, "onFailed: "+erno);
+            }
+        });
 
-        recyclerNatives.setLayoutManager(new LinearLayoutManager(this));
+        findViewById(R.id.ad).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "CLICK", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        TestAdapter t = new TestAdapter(this);
-        t.configureRecyclerNatives(recyclerNatives);
-
-        recyclerNatives.setAdapter(t);
 
     }
 

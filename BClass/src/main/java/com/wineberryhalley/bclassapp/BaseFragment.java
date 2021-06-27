@@ -190,11 +190,13 @@ else
 
     public static void registerCircularRevealAnimation(final Context context, final View view, final RevealAnimationSetting revealSettings, final int startColor, final int endColor) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+    //        Log.e("MAIN", "registerCircularRevealAnimation: seteed" );
             view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                     v.removeOnLayoutChangeListener(this);
+            //       v.setVisibility(View.VISIBLE);
                     int cx = revealSettings.getCenterX();
                     int cy = revealSettings.getCenterY();
                     int width = revealSettings.getWidth();
@@ -205,6 +207,27 @@ else
                     float finalRadius = (float) Math.sqrt(width * width + height * height);
                     Animator anim = ViewAnimationUtils.createCircularReveal(v, cx, cy, 0, finalRadius).setDuration(duration);
                     anim.setInterpolator(new FastOutSlowInInterpolator());
+                    anim.addListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            Log.e("MAIN", "onAnimationStart: " );
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            Log.e("MAIN", "onAnimationEnd: " );
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+
+                        }
+                    });
                     anim.start();
                     startColorAnimation(view, startColor, endColor, duration);
                 }

@@ -98,6 +98,7 @@ listener.onSuccess(s);
             public void onFailed(GT3ErrorBean gt3ErrorBean) {
             //    Log.e("MAIN", "onFailed: "+gt3ErrorBean.errorCode );
 listener.onFailed(gt3ErrorBean.errorDesc);
+
             }
 
             @Override

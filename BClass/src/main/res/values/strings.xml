@@ -13,4 +13,5 @@
     <string name="_default_perm">%s needs this permission to work properly</string>
     <string name="success_perm">Success</string>
     <string name="success_perm_de">All necessary permits were granted</string>
+    <string name="please_verify_bas">Please verify that you are not a robot</string>
 </resources>
