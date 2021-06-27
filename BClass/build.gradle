@@ -57,4 +57,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-messaging:21.0.1'
     implementation 'com.google.firebase:firebase-analytics:18.0.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+
+    implementation 'androidx.preference:preference:1.1.1'
+
+    implementation 'com.geetest.sensebot:sensebot:4.3.2'
 }

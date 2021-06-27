@@ -102,7 +102,7 @@ public abstract class BaseActivityNoStatus extends AppCompatActivity {
     }
 
     private int transparentStatusAndNavigation(Activity context) {
-     /*   Rect rectangle = new Rect();
+     /*   Rect rectangle = nuevo Rect();
         Window window = context.getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
         int statusBarHeight = rectangle.top;

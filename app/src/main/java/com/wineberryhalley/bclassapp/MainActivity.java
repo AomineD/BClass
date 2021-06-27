@@ -3,6 +3,7 @@ package com.wineberryhalley.bclassapp;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
 import android.app.Activity;
@@ -21,7 +22,9 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.wineberryhalley.bclassapp.baseapi.BaseApi;
 import com.wineberryhalley.bclassapp.baseapi.Interfaces;
 import com.wineberryhalley.bclassapp.baseapi.ObjectType;
+import com.wineberryhalley.bclassapp.captcha.WineCaptcha;
 import com.wineberryhalley.bclassapp.notification.DownloadNotification;
+import com.wineberryhalley.bclassapp.nuevo.RecyclerNatives;
 import com.wineberryhalley.bclassapp.permission.PermissionBottom;
 
 import java.io.ByteArrayOutputStream;
@@ -43,9 +46,43 @@ public class MainActivity extends BaseActivity {
     */
 
 
-        DownloadNotification downloadNotification = new DownloadNotification("Download", "ah");
+    /*    DownloadNotification downloadNotification = nuevo DownloadNotification("Download", "ah");
 
-        downloadNotification.setMaxProgress(100);
+        downloadNotification.setMaxProgress(100);*/
+
+        WineCaptcha.getOn(this).config()
+                .show(findViewById(R.id.capt), new WineCaptcha.CaptchaListener() {
+                    @Override
+                    public void onButtonClick() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(String s) {
+                        Log.e(TAG, "onSuccess: " );
+                    }
+
+                    @Override
+                    public void onClosed(int i) {
+
+                    }
+
+                    @Override
+                    public void onFailed(String erno) {
+                        Log.e(TAG, "onFailed: "+erno );
+                    }
+                });
+
+
+        RecyclerNatives recyclerNatives = findViewById(R.id.rec_nativ);
+
+        recyclerNatives.setLayoutManager(new LinearLayoutManager(this));
+
+        TestAdapter t = new TestAdapter(this);
+        t.configureRecyclerNatives(recyclerNatives);
+
+        recyclerNatives.setAdapter(t);
+
     }
 
     @Override
@@ -58,15 +95,9 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-    @Override
-    public ArrayList<String> keysNotification() {
-        return null;
-    }
 
-    @Override
-    public void onReceiveValues(ArrayList<String> values) {
 
-    }
+
 
     private String profileUri;
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

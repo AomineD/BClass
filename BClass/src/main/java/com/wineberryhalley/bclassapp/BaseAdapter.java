@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.wineberryhalley.bclassapp.nuevo.RecyclerNatives;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,4 +127,27 @@ bindHolder((T) holder, position, ls.get(position));
 
         };
     }
+
+    private boolean showNatives = false;
+
+    protected boolean canLoadNatives(){
+        return showNatives;
+    }
+
+    public void configureRecyclerNatives(RecyclerNatives recyclerNatives){
+        recyclerNatives.setRecyclerListener(new RecyclerNatives.RecyclerListener() {
+            @Override
+            public void putNativesNow() {
+                showNatives = true;
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void hideNatives() {
+                showNatives = false;
+                notifyDataSetChanged();
+            }
+        });
+    }
+
 }
