@@ -72,7 +72,7 @@ public class RecyclerNatives extends RecyclerView {
             }
 
             if(recyclerListener != null){
-                Log.e("MAIN", "onScrollStateChanged: "+newState);
+              //  Log.e("MAIN", "onScrollStateChanged: "+newState);
                 if(newState == RecyclerView.SCROLL_STATE_IDLE){
                     recyclerListener.putNativesNow();
                 }else{

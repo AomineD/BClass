@@ -139,13 +139,13 @@ bindHolder((T) holder, position, ls.get(position));
             @Override
             public void putNativesNow() {
                 showNatives = true;
-                notifyDataSetChanged();
+              //  notifyDataSetChanged();
             }
 
             @Override
             public void hideNatives() {
                 showNatives = false;
-                notifyDataSetChanged();
+              //  notifyDataSetChanged();
             }
         });
     }
