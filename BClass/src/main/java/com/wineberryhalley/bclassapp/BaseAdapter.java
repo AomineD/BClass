@@ -128,7 +128,7 @@ bindHolder((T) holder, position, ls.get(position));
         };
     }
 
-    private boolean showNatives = true;
+    public boolean showNatives = true;
 
     protected boolean canLoadNatives(){
         return showNatives;

@@ -70,10 +70,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         ((ViewGroup) root()).addView(inflay);
         inflay.setVisibility(View.GONE);
         handleNotifIfExist();
+        this.savedInstanceState = savedInstanceState;
         Main();
 
 
 
+
+    }
+
+    private Bundle savedInstanceState;
+
+    public Bundle getSavedInstanceState(){
+        return savedInstanceState;
     }
 
     private View inflay;
