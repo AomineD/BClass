@@ -278,6 +278,24 @@ public static void loadImageIn(String img, ImageView imgview){
 }
 
 
+    public static void loadImageLoadingPath(String path, ImageView imgview, LottieAnimationView lt){
+        Picasso.get().load(path).fetch(new Callback(){
+            @Override
+            public void onSuccess() {
+                imgview.setAlpha(0f);
+                Picasso.get().load(path).fit().into(imgview);
+                lt.setVisibility(View.GONE);
+                imgview.animate().setDuration(1000).alpha(1f).start();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                lt.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
 private static String apike = "79d54c96b390d98b80dbe6ca12d83615";
 
 public interface UploadListener{

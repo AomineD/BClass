@@ -89,6 +89,12 @@ if(assetName != null && !assetName.isEmpty()){
             PicassoUtils.loadImageWithLoading(rawFile, img, loading_root);
     }
 
+    public void loadImgPath(String path){
+        if(!path.isEmpty() && img != null && loading_root != null) {
+                PicassoUtils.loadImageLoadingPath(path, img, loading_root);
+        }
+    }
+
     public void loadImg(String url, boolean faded){
         if(!url.isEmpty() && img != null && loading_root != null) {
          if(!faded)
